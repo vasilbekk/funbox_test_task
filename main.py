@@ -44,7 +44,7 @@ def add_visited_links_view(visited_links_instance: VisitedLinksIn = Body(...)):
 
 
 @app.get('/visited_domains')
-def get_visited_domains_view(start: str = Query("1643023307", alias='from'), end: str = Query("1643059307", alias='to')):
+def get_visited_domains_view(start: str = Query(alias='from'), end: str = Query(alias='to')):
     try:
         a, b = (int(start), int(end))
     except ValueError:
