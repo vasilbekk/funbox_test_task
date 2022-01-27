@@ -1,4 +1,5 @@
 from datetime import datetime
+from config import REDIS_DB, REDIS_HOST, REDIS_PASSWORD, REDIS_PORT
 
 from fastapi import Body, FastAPI, Query, Request
 from fastapi.exceptions import RequestValidationError
@@ -11,7 +12,7 @@ from db import RedisDatabaseProxy
 from schemas import VisitedLinksIn
 
 app = FastAPI()
-db = StrictRedis('localhost', 6379, db=0, password='foobared', charset="utf-8", decode_responses=True)
+db = StrictRedis(REDIS_HOST, REDIS_PORT, db=REDIS_DB, password=REDIS_PASSWORD, charset="utf-8", decode_responses=True)
 db_proxy = RedisDatabaseProxy(database=db)
 
 STATUS_OK = {'status': 'ok'}
