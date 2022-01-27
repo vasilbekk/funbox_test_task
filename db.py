@@ -70,9 +70,9 @@ class RedisDatabaseProxy(AbstractDatabaseProxy):
                 pattern += str_start[i]
             else:
                 break
-           
+        pattern += "*"
         
-        for key in self._database.scan_iter(self.build_key(pattern + "*")):
+        for key in self._database.scan_iter(self.build_key(pattern)):
             try:
                 int_key = int(self.unbuild_key(key))
             except ValueError:
