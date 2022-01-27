@@ -1,5 +1,4 @@
 from datetime import datetime
-from config import REDIS_DB, REDIS_HOST, REDIS_PASSWORD, REDIS_PORT
 
 from fastapi import Body, FastAPI, Query, Request
 from fastapi.exceptions import RequestValidationError
@@ -8,6 +7,7 @@ from redis import StrictRedis
 from starlette.status import (HTTP_200_OK, HTTP_400_BAD_REQUEST,
                               HTTP_422_UNPROCESSABLE_ENTITY)
 
+from config import REDIS_DB, REDIS_HOST, REDIS_PASSWORD, REDIS_PORT
 from db import RedisDatabaseProxy
 from schemas import VisitedLinksIn
 
@@ -44,7 +44,7 @@ def add_visited_links_view(visited_links_instance: VisitedLinksIn = Body(...)):
 
 
 @app.get('/visited_domains')
-def get_visited_domains_view(start: str = Query(alias='from'), end: str = Query(alias='to')):
+def get_visited_domains_view(start: str = Query("", alias='from'), end: str = Query("", alias='to')):
     try:
         a, b = (int(start), int(end))
     except ValueError:
