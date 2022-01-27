@@ -48,9 +48,9 @@ def get_visited_domains_view(start: str = Query("", alias='from'), end: str = Qu
     try:
         a, b = (int(start), int(end))
     except ValueError:
-        raise ValueError("ValueError: 'start' and 'end' must be Integers only! (unix timestamp)")
+        raise ValueError("ValueError: 'from' and 'to' must be Integers only! (unix timestamp)")
 
-    if not a < b: raise ValueError("ValueError: 'start' must be less than 'end'")
+    if not a < b: raise ValueError("ValueError: 'from' must be less than 'to'")
 
     domains = db_proxy.get_unique_values_by_timerange(start = a, end = b)
 
